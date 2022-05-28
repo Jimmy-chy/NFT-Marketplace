@@ -1,14 +1,14 @@
-const ArtToken = artifacts.require("ArtToken");
-const ArtMarketplace = artifacts.require("ArtMarketplace");
+const Color = artifacts.require("Color");
+const ColorMarketplace = artifacts.require("ColorMarketplace");
 
 module.exports = async function(deployer) {
-  await deployer.deploy(ArtToken);
+  await deployer.deploy(Color);
 
-  const token = await ArtToken.deployed()
+  const token = await Color.deployed()
 
-  await deployer.deploy(ArtMarketplace, token.address)
+  await deployer.deploy(ColorMarketplace, token.address)
 
-  const market = await ArtMarketplace.deployed()
+  const market = await ColorMarketplace.deployed()
 
   await token.setMarketplace(market.address)
 };
