@@ -96,7 +96,6 @@ contract ArtMarketplace {
       emit itemSold(id, msg.sender, itemsForSale[id].price);
     }
 
-
 //  function edit(uint256 tokenId)
 //    OnlyItemOwner(tokenId)
 //    HasEditApproval(tokenId)
@@ -110,7 +109,6 @@ contract ArtMarketplace {
 //
 //      emit itemEdit(id,tokenId,price);
 //    }
-
 
   function totalItemsForSale() external view returns(uint256) {
     return itemsForSale.length;
