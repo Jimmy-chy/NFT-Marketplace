@@ -26,7 +26,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import MenuList from '@material-ui/core/MenuList';
 import {useStyles} from './styles.js'
 
-import logo from '../../assets/shsxy.svg';
+import logo from '../../assets/logo.png';
 import { ex } from "../../common/global.js";
 const Header = (props) => {
     const classes = useStyles();
