@@ -30,7 +30,7 @@ Galerie is a NFT Marketplace that enables the creation, sale, and purchase of di
 Check out how it looks:
 
 <p align="center">
- <img alt="Homepage print"   src="https://github.com/Jimmy-chy/NFT-Marketplace/blob/master/client/public/home.png" >
+ <img alt="Homepage print"   src="https://github.com/Jimmy-chy/NFT-Marketplace/blob/Goerli/client/public/home.png" >
 <p />
 
 <a id='architecture' />
