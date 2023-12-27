@@ -8,7 +8,7 @@ const useStyles = makeStyles((theme) =>({
     marginLeft:"3rem"
   },
   logo: {
-    width: "10rem"
+    width: "20rem"
   },
   account: {
     display: "flex",
