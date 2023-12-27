@@ -90,6 +90,9 @@ Now go to project folder and run:
 ```bash
 $ cd NFT-Marketplace
 
+# install @truffle/hdwallet-provider
+$ npm install @truffle/hdwallet-provider
+
 # install the dependencies
 $ yarn
 
@@ -97,7 +100,7 @@ $ yarn
 $ ganache-cli
 
 # deploy de contracts on the blockchain
-$ truffle migrate
+$ truffle migrate --network goerli
 
 # run the client-side
 $ cd client
