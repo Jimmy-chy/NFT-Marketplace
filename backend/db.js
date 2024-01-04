@@ -4,7 +4,7 @@ const config = {
     host: 'localhost',   // 服务器的地址
     port: 3306,          // 端口号
     user: 'root',        // 用户名
-    password: 'nfttest123',
+    password: '123456',
     database: 'nft',
     multipleStatements: true
 }

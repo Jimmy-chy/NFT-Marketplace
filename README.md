@@ -30,7 +30,7 @@ Galerie is a NFT Marketplace that enables the creation, sale, and purchase of di
 Check out how it looks:
 
 <p align="center">
- <img alt="Homepage print"   src="https://github.com/Jimmy-chy/NFT-Marketplace/blob/master/client/public/home.png" >
+ <img alt="Homepage print"   src="https://github.com/Jimmy-chy/NFT-Marketplace/blob/Goerli/client/public/home.png" >
 <p />
 
 <a id='architecture' />
@@ -90,6 +90,9 @@ Now go to project folder and run:
 ```bash
 $ cd NFT-Marketplace
 
+# install @truffle/hdwallet-provider
+$ npm install @truffle/hdwallet-provider
+
 # install the dependencies
 $ yarn
 
@@ -97,7 +100,7 @@ $ yarn
 $ ganache-cli
 
 # deploy de contracts on the blockchain
-$ truffle migrate
+$ truffle migrate --network goerli
 
 # run the client-side
 $ cd client
