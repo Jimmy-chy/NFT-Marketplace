@@ -263,7 +263,7 @@ const CreateNFT = () => {
                 </Dialog>
                 <Button variant="outlined" color="primary" onClick={handleClickOpen('paper')}>版权协议</Button>
                 <Button variant="outlined" color="primary" type="submit" disabled={flag}>
-                  Submit
+                  提交
                 </Button>
 
             </div>

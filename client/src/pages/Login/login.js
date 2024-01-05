@@ -184,7 +184,7 @@ const Login = () => {
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-                    <h2>上商NFT平台</h2>
+                    <h2>高安全等级数据资产交易管理平台</h2>
                 </Grid>
                 <div style={{display:ex.isLogin?'none':'block'}}>
                 <TextField id='uname' onChange={handleInputChange} label='用户名' placeholder='输入用户名' name="uname" fullWidth required/>
