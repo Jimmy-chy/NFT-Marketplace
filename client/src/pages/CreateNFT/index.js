@@ -21,8 +21,8 @@ import { useStyles } from "./styles.js";
 import DropZone from "../../components/DropZone";
 
 import { api } from "../../services/api";
-
-
+import { LinearProgress, Paper, Typography } from '@material-ui/core';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 
 const CreateNFT = () => {
@@ -141,12 +141,40 @@ const CreateNFT = () => {
       alert("Error while minting!");
     }
   }
+  const [uploadProgress, setUploadProgress] = useState(0);
+
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+  const handleUpload = () => {
+    if (!selectedFile) {
+      alert('请选择一个文件');
+      return;
+    }
+
+    // 模拟上传过程，实际项目中需要替换成你的上传逻辑
+    const totalSize = selectedFile.size;
+    const chunkSize = 1024 * 1024; // 每次上传1MB
+    let uploaded = 0;
+
+    const uploadInterval = setInterval(() => {
+      uploaded += chunkSize;
+      const progress = Math.min((uploaded / totalSize) * 100, 100);
+      setUploadProgress(progress);
+
+      if (progress === 100) {
+        clearInterval(uploadInterval);
+        // 在这里可以触发上传成功的回调或者其他操作
+      }
+    }, 1000);
+  };
 
   return (
     <div className={classes.pageCreateNft}>
       <form onSubmit={createNFT}>
         <div className={classes.formHeader}>
-          <h1>创作NFT</h1>
+          <h1>创作数据资产NFT</h1>
           <Link to="/">
             <CancelOutlinedIcon fontSize="large" />
           </Link>
@@ -155,6 +183,7 @@ const CreateNFT = () => {
           <div className={classes.dropzone}>
             <DropZone onFileUploaded={setSelectedFile} />
           </div>
+
           <fieldset>
             <TextField
               label="标题"
@@ -177,32 +206,7 @@ const CreateNFT = () => {
               onChange={handleInputChange}
               fullWidth
             />
-            {/*<FormControl className={classes.formControl} fullWidth>*/}
-            {/*  <InputLabel id="demo-controlled-open-select-label">所属学院</InputLabel>*/}
-            {/*  <Select*/}
-            {/*      labelId="demo-controlled-open-select-label"*/}
-            {/*      id="demo-controlled-open-select"*/}
-            {/*      value={college}*/}
-            {/*      onChange={handleChange}*/}
-            {/*  >*/}
-            {/*    <MenuItem value="">*/}
-            {/*      <em>None</em>*/}
-            {/*    </MenuItem>*/}
-            {/*    <MenuItem value={1}>工商管理学院</MenuItem>*/}
-            {/*    <MenuItem value={2}>财务金融学院</MenuItem>*/}
-            {/*    <MenuItem value={3}>商务经济学院</MenuItem>*/}
-            {/*    <MenuItem value={4}>酒店管理学院</MenuItem>*/}
-            {/*    <MenuItem value={5}>商务外语学院</MenuItem>*/}
-            {/*    <MenuItem value={6}>艺术设计学院</MenuItem>*/}
-            {/*    <MenuItem value={7}>商务信息学院</MenuItem>*/}
-            {/*    <MenuItem value={8}>文法学院</MenuItem>*/}
-            {/*    <MenuItem value={9}>马克思主义学院</MenuItem>*/}
-            {/*    <MenuItem value={10}>上海洛桑酒店管理学院</MenuItem>*/}
-            {/*    <MenuItem value={11}>现代流通国家级实验教学示范中心</MenuItem>*/}
-            {/*    <MenuItem value={12}>国际教育学院、商务部国际商务官员研修基地（上海）</MenuItem>*/}
-            {/*  </Select>*/}
 
-            {/*</FormControl>*/}
             <TextField
               label="价格"
               name="price"
@@ -214,6 +218,42 @@ const CreateNFT = () => {
               }}
               fullWidth
             />
+
+            <Paper  style={{ padding: 10, width: '100%',  margin: 'auto'  }}>
+              <input
+                  // accept="image/*"
+                  style={{ display: 'none' }}
+                  id="file-upload-input"
+                  type="file"
+                  onChange={handleFileChange}
+              />
+              <label htmlFor="file-upload-input">
+                <Button
+                    variant="outlined"
+                    color="primary"
+                    component="span"
+                    startIcon={<CloudUploadIcon />}
+                    fullWidth
+                >
+                  选择数据资产文件
+                </Button>
+              </label>
+
+              {selectedFile && (
+                  // <Typography variant="body1" style={{ marginTop: 10 }}>
+                  //   已选择文件: {selectedFile.name}
+                  // </Typography>
+                  <TextField
+                      label="已选择文件"
+                      name="price"
+                      variant="filled"
+                      value={selectedFile.name}
+                      style={{ marginTop: 10 }}
+                      fullWidth
+                  />
+              )}
+            </Paper>
+
             <div>
                 <Dialog
                     open={open}
