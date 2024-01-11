@@ -12,6 +12,9 @@ import Web3 from "web3";
 import { selectedNft, removeSelectedNft } from "../../redux/actions/nftActions";
 
 import { useStyles } from "./styles.js";
+import CloudUploadIcon from "@material-ui/icons/CloudUpload";
+import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
+import {Paper} from "@material-ui/core";
 
 
 const Item = () => {
@@ -95,7 +98,35 @@ const Item = () => {
       alert("Error while buying!");
     }
   };
+  const [selectedFile, setSelectedFile] = useState();
+  const [uploadProgress, setUploadProgress] = useState(0);
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    setSelectedFile(file);
+  };
+  const handleUpload = () => {
+    if (!selectedFile) {
+      alert('请选择一个文件');
+      return;
+    }
+
+    // 模拟上传过程，实际项目中需要替换成你的上传逻辑
+    const totalSize = selectedFile.size;
+    const chunkSize = 1024 * 1024; // 每次上传1MB
+    let uploaded = 0;
+
+    const uploadInterval = setInterval(() => {
+      uploaded += chunkSize;
+      const progress = Math.min((uploaded / totalSize) * 100, 100);
+      setUploadProgress(progress);
+
+      if (progress === 100) {
+        clearInterval(uploadInterval);
+        // 在这里可以触发上传成功的回调或者其他操作
+      }
+    }, 1000);
+  };
   return (
       <div className={classes.pageItem}>
         {Object.keys(nft).length === 0 ? (
@@ -170,6 +201,52 @@ const Item = () => {
                           fullWidth
                           disabled
                       />
+                      {selectedFile && (
+                          // <Typography variant="body1" style={{ marginTop: 10 }}>
+                          //   已选择文件: {selectedFile.name}
+                          // </Typography>
+                          <TextField
+                              label="数据资产文件"
+                              name="price"
+                              variant="filled"
+                              value={selectedFile.name}
+                              style={{ marginTop: 10 }}
+                              fullWidth
+                          />
+                      )}
+                      <Paper  style={{ padding: 10, width: '100%',  margin: 'auto'  }}>
+                        <input
+                            // accept="image/*"
+                            style={{ display: 'none' }}
+                            id="file-upload-input"
+                            type="file"
+                            onChange={handleFileChange}
+                        />
+                        <label htmlFor="file-upload-input">
+                          {!selectedFile && (
+                              <Button
+                                  variant="outlined"
+                                  color="primary"
+                                  component="span"
+                                  startIcon={<CloudUploadIcon />}
+                                  fullWidth
+                              >
+                                选择数据资产文件
+                              </Button>
+                          )}
+                          <Button
+                              variant="outlined"
+                              color="primary"
+                              startIcon={<CloudDownloadIcon />}
+                              fullWidth
+                          >
+                            下载数据资产文件
+                          </Button>
+                        </label>
+
+
+                      </Paper>
+
                       <Grid item xs={12} direction="row">
                         {owner === account && !isForSale && (
                             <Button

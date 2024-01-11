@@ -21,7 +21,7 @@ import { useStyles } from "./styles.js";
 import DropZone from "../../components/DropZone";
 
 import { api } from "../../services/api";
-import { LinearProgress, Paper, Typography } from '@material-ui/core';
+import { Paper } from '@material-ui/core';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
 
