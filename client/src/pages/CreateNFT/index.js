@@ -301,10 +301,12 @@ const CreateNFT = () => {
                     </Button>
                   </DialogActions>
                 </Dialog>
+              <div style={{ marginTop: 10 }}>
                 <Button variant="outlined" color="primary" onClick={handleClickOpen('paper')}>版权协议</Button>
                 <Button variant="outlined" color="primary" type="submit" disabled={flag}>
                   提交
                 </Button>
+              </div>
 
             </div>
           </fieldset>
