@@ -241,7 +241,7 @@ const Item = () => {
                                   startIcon={<CloudUploadIcon />}
                                   fullWidth
                               >
-                                选择数据资产文件
+                                上传原始资产数据
                               </Button>
                           )}
                           <Button
@@ -250,7 +250,7 @@ const Item = () => {
                               startIcon={<CloudDownloadIcon />}
                               fullWidth
                           >
-                            下载数据资产文件
+                            下载原始资产数据
                           </Button>
                         </label>
 

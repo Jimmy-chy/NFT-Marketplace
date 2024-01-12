@@ -246,7 +246,7 @@ const CreateNFT = () => {
                     startIcon={<CloudUploadIcon />}
                     fullWidth
                 >
-                  选择数据资产文件
+                  上传原始资产数据
                 </Button>
               </label>
 
@@ -255,7 +255,7 @@ const CreateNFT = () => {
                   //   已选择文件: {selectedFile.name}
                   // </Typography>
                   <TextField
-                      label="已选择文件"
+                      label="已上传原始资产数据"
                       name="price"
                       variant="filled"
                       value={selectedFile.name}
