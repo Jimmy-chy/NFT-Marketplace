@@ -7,7 +7,7 @@ const useStyles = makeStyles({
         margin: "0 auto",
 
         '& form': {
-            margin: "20px auto 80px auto",
+            margin: "150px auto 80px auto",
             maxWidth: "730px",
             background: "#FFF",
             borderRadius: "8px",

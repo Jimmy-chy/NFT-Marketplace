@@ -37,6 +37,7 @@ const CreateNFT = () => {
   const [selectedFile, setSelectedFile] = useState();
   const [formData, setFormData] = useState({
     title: "",
+    type: "",
     description: "",
     price: "",
   });
@@ -93,12 +94,13 @@ const CreateNFT = () => {
   async function createNFT(event) {
     console.log(formData)
     event.preventDefault();
-    const { title, description,price} = formData;
+    const { title,type, description,price} = formData;
 
-    console.log("title: " + title);
+    // console.log("title: " + title);
     const data = new FormData();
 
     data.append("name", title);
+    data.append("type", type);
     data.append("description", description);
     data.append("price", price);
     // data.append("author", author);
@@ -106,7 +108,7 @@ const CreateNFT = () => {
 
     if(selectedFile){
       data.append('img', selectedFile);
-      console.log("slectedFile: ", selectedFile);
+      // console.log("slectedFile: ", selectedFile);
     }
 
     try {
@@ -118,7 +120,7 @@ const CreateNFT = () => {
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         },
       });
-      console.log("CreateNFT------------response",response);
+      // console.log("CreateNFT------------response",response);
 
 
       await mint(response.data.message);
@@ -133,8 +135,8 @@ const CreateNFT = () => {
       const receipt = await artTokenContract.methods
         .mint(tokenMetadataURL)
         .send({ from: account });
-      console.log(receipt);
-      console.log(receipt.events.Transfer.returnValues.tokenId);
+      // console.log(receipt);
+      // console.log(receipt.events.Transfer.returnValues.tokenId);
       history.push('/');
     } catch (error) {
       console.error("Error, minting: ", error);
@@ -193,6 +195,15 @@ const CreateNFT = () => {
               value={formData.title}
               onChange={handleInputChange}
               fullWidth
+            />
+            <TextField
+                label="类型"
+                name="type"
+                variant="filled"
+                required
+                value={formData.type}
+                onChange={handleInputChange}
+                fullWidth
             />
             <TextField
               id="outlined-multiline-static"

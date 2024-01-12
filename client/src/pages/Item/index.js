@@ -35,6 +35,7 @@ const Item = () => {
   const {
     image,
     name,
+    type,
     price,
     owner,
     creator,
@@ -67,7 +68,7 @@ const Item = () => {
           const receipt2 = await artTokenContract.methods
               .approve(marketplaceContract._address,id)
               .send({gas:210000,from: account });
-          console.log(receipt2);
+          // console.log(receipt2);
         }catch (error) {
           console.error("Error while giveResaleApproval",error);
         }
@@ -78,7 +79,7 @@ const Item = () => {
           .putItemForSale(id, price)
           .send({ gas: 210000, from: account });
 
-      console.log(receipt);
+      // console.log(receipt);
 
     } catch (error) {
       console.error("Error, puting for sale: ", error);
@@ -91,7 +92,7 @@ const Item = () => {
       const receipt = await marketplaceContract.methods
           .buyItem(saleId)
           .send({ gas: 210000, value: price, from: account });
-      console.log(receipt);
+      // console.log(receipt);
       const id = receipt.events.itemSold.id; ///saleId
     } catch (error) {
       console.error("Error, buying: ", error);
@@ -171,6 +172,15 @@ const Item = () => {
                           fullWidth
                           margin="dense"
                           defaultValue={owner.slice(0, 7) + "..." + owner.slice(-4)}
+                      />
+                      <TextField
+                          label="类型"
+                          name="type"
+                          variant="filled"
+                          margin="dense"
+                          disabled
+                          fullWidth
+                          defaultValue={"数字文创"}
                       />
                       <TextField
                           id="outlined-multiline-static"
