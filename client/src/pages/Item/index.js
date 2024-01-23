@@ -7,8 +7,12 @@ import InputAdornment from "@material-ui/core/InputAdornment";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Web3 from "web3";
-
-
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import { makeStyles } from '@material-ui/core/styles';
 import { selectedNft, removeSelectedNft } from "../../redux/actions/nftActions";
 
 import { useStyles } from "./styles.js";
@@ -16,10 +20,21 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import {Paper} from "@material-ui/core";
 
-
+const useStylesDetails = makeStyles((theme) => ({
+  root: {
+    marginLeft: "3em",
+    marginRight: "3em",
+    marginTop: "1em",
+    marginBottom: "1em"
+  },
+  heading: {
+    fontSize: theme.typography.pxToRem(18),
+    fontWeight: theme.typography.fontWeightBold,
+  },
+}));
 const Item = () => {
   const classes = useStyles();
-
+  const classesDetails = useStylesDetails();
   const { nftId } = useParams();
   const marketplaceContract = useSelector(
       (state) => state.allNft.marketplaceContract
@@ -149,6 +164,44 @@ const Item = () => {
                     <figure>
                       <img className="ui fluid image" src={image} />
                     </figure>
+
+                    <div className={classesDetails.root}>
+                      <Accordion>
+                        <AccordionSummary
+                            expandIcon={<ExpandMoreIcon />}
+                            aria-controls="panel1a-content"
+                            id="panel1a-header"
+                        >
+                          <Typography className={classesDetails.heading}>Token Details</Typography>
+                        </AccordionSummary>
+                        <AccordionDetails>
+                          <Typography>
+                            <div>
+                              <span style={{fontSize: '14px'}}>
+                                Contract Address
+                              </span>
+                              <a href="https://goerli.etherscan.io/address/0x13dce096e0b146388f8df5944f6a6666d6f18a45" target="_blank" style={{marginLeft:'9em',fontSize: '12px'}}>0x13Dce0...8A45</a>
+                              <br/>
+                              <div style={{marginTop: '6px',marginBottom: '6px'}}>
+                                <span style={{fontSize: '14px'}}>
+                                Token ID
+                                </span>
+                                <span style={{marginLeft:'17em',fontSize: '12px'}}>
+                                  {tokenId}
+                                </span>
+                              </div>
+                              <span style={{fontSize: '14px'}}>
+                                Token Standard
+                              </span>
+                              <span style={{marginLeft:'11em',fontSize: '12px'}}>
+                                ERC-721
+                              </span>
+                            </div>
+                          </Typography>
+                        </AccordionDetails>
+                      </Accordion>
+                    </div>
+
                   </Grid>
                   <Grid item md={5} sm={5} xs={12}>
                     <fieldset>
@@ -201,13 +254,18 @@ const Item = () => {
                           name="price"
                           variant="filled"
                           margin="dense"
-                          // defaultValue={Web3.utils.fromWei(String(price), "ether")}
-                          defaultValue={String(price)}
+                          defaultValue={Web3.utils.fromWei(String(price), "ether")}
                           InputProps={{
                             startAdornment: (
-                                <InputAdornment position="start">￥</InputAdornment>
+                                <InputAdornment position="start">ETH</InputAdornment>
                             ),
                           }}
+                          // defaultValue={String(price)}
+                          // InputProps={{
+                          //   startAdornment: (
+                          //       <InputAdornment position="start">￥</InputAdornment>
+                          //   ),
+                          // }}
                           fullWidth
                           disabled
                       />
@@ -224,7 +282,7 @@ const Item = () => {
                               fullWidth
                           />
                       )}
-                      <Paper  style={{ padding: 10, width: '100%',  margin: 'auto'  }}>
+                      <Paper  style={{ padding: 10, width: '100%',  marginTop: '1em'  }}>
                         <input
                             // accept="image/*"
                             style={{ display: 'none' }}
@@ -263,6 +321,7 @@ const Item = () => {
                                 variant="contained"
                                 color="primary"
                                 onClick={() => putForSale(tokenId, price)}
+                                style={{marginTop: "1em",marginBottom: "1em",marginRight: "1em"}}
                             >
                               售卖
                             </Button>
@@ -273,6 +332,7 @@ const Item = () => {
                                 variant="contained"
                                 color="primary"
                                 onClick={() => buy(saleId, price)}
+                                style={{marginTop: "1em",marginBottom: "1em",marginRight: "1em"}}
                             >
                               购买
                             </Button>
@@ -282,6 +342,7 @@ const Item = () => {
                               <Button
                                   variant="outlined"
                                   color="primary"
+                                  style={{marginTop: "1em",marginBottom: "1em",marginLeft: "1em"}}
                               >
                                 转让
                               </Button>
