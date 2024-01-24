@@ -20,6 +20,13 @@ import CloudUploadIcon from "@material-ui/icons/CloudUpload";
 import CloudDownloadIcon from "@material-ui/icons/CloudDownload";
 import {Paper} from "@material-ui/core";
 
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
+import LockIcon from '@material-ui/icons/Lock';
+
 const useStylesDetails = makeStyles((theme) => ({
   root: {
     marginLeft: "3em",
@@ -73,6 +80,16 @@ const Item = () => {
       dispatch(removeSelectedNft());
     };
   }, [nftId]);
+
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   async function putForSale(id, price) {
     try {
@@ -269,50 +286,75 @@ const Item = () => {
                           fullWidth
                           disabled
                       />
-                      {selectedFile && (
-                          // <Typography variant="body1" style={{ marginTop: 10 }}>
-                          //   已选择文件: {selectedFile.name}
-                          // </Typography>
-                          <TextField
-                              label="数据资产文件"
-                              name="price"
-                              variant="filled"
-                              value={selectedFile.name}
-                              style={{ marginTop: 10 }}
-                              fullWidth
-                          />
-                      )}
+                      {/*{selectedFile && (*/}
+                      {/*    // <Typography variant="body1" style={{ marginTop: 10 }}>*/}
+                      {/*    //   已选择文件: {selectedFile.name}*/}
+                      {/*    // </Typography>*/}
+                      {/*    <TextField*/}
+                      {/*        label="数据资产文件"*/}
+                      {/*        name="price"*/}
+                      {/*        variant="filled"*/}
+                      {/*        value={selectedFile.name}*/}
+                      {/*        style={{ marginTop: 10 }}*/}
+                      {/*        fullWidth*/}
+                      {/*    />*/}
+                      {/*)}*/}
                       <Paper  style={{ padding: 10, width: '100%',  marginTop: '1em'  }}>
-                        <input
-                            // accept="image/*"
-                            style={{ display: 'none' }}
-                            id="file-upload-input"
-                            type="file"
-                            onChange={handleFileChange}
-                        />
-                        <label htmlFor="file-upload-input">
-                          {!selectedFile && (
-                              <Button
-                                  variant="outlined"
-                                  color="primary"
-                                  component="span"
-                                  startIcon={<CloudUploadIcon />}
-                                  fullWidth
-                              >
-                                上传原始资产数据
-                              </Button>
-                          )}
-                          <Button
-                              variant="outlined"
-                              color="primary"
-                              startIcon={<CloudDownloadIcon />}
-                              fullWidth
-                          >
-                            下载原始资产数据
-                          </Button>
-                        </label>
-
-
+                        {/*<input*/}
+                        {/*    // accept="image/*"*/}
+                        {/*    style={{ display: 'none' }}*/}
+                        {/*    id="file-upload-input"*/}
+                        {/*    type="file"*/}
+                        {/*    onChange={handleFileChange}*/}
+                        {/*/>*/}
+                        {/*<label htmlFor="file-upload-input">*/}
+                        {/*{!selectedFile && (*/}
+                        {/*    <Button*/}
+                        {/*        variant="outlined"*/}
+                        {/*        color="primary"*/}
+                        {/*        component="span"*/}
+                        {/*        startIcon={<CloudUploadIcon />}*/}
+                        {/*        fullWidth*/}
+                        {/*    >*/}
+                        {/*      上传原始资产数据*/}
+                        {/*    </Button>*/}
+                        {/*)}*/}
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            onClick={handleClickOpen}
+                            startIcon={<LockIcon/>}
+                            style={{marginLeft: "2em",marginRight: "2em"}}
+                        >
+                          解密数据
+                        </Button>
+                        <Button
+                            variant="outlined"
+                            color="primary"
+                            startIcon={<CloudDownloadIcon />}
+                        >
+                          下载数据
+                        </Button>
+                        <Dialog
+                            open={open}
+                            onClose={handleClose}
+                            aria-labelledby="alert-dialog-title"
+                            aria-describedby="alert-dialog-description"
+                        >
+                          <DialogTitle id="alert-dialog-title">{"请输入私钥解密数据"}</DialogTitle>
+                          <DialogContent>
+                            <TextField id='pwd' label='私钥' placeholder='请输入私钥' name="pwd" type='password' style={{width: "500px"}} required/>
+                          </DialogContent>
+                          <DialogActions>
+                            <Button onClick={handleClose} color="primary">
+                              取消
+                            </Button>
+                            <Button onClick={handleClose} color="primary" autoFocus>
+                              确认
+                            </Button>
+                          </DialogActions>
+                        </Dialog>
+                        {/*</label>*/}
                       </Paper>
 
                       <Grid item xs={12} direction="row">
@@ -321,7 +363,7 @@ const Item = () => {
                                 variant="contained"
                                 color="primary"
                                 onClick={() => putForSale(tokenId, price)}
-                                style={{marginTop: "1em",marginBottom: "1em",marginRight: "1em"}}
+                                style={{marginTop: "2em",marginBottom: "1em",marginRight: "1em"}}
                             >
                               售卖
                             </Button>
@@ -332,7 +374,7 @@ const Item = () => {
                                 variant="contained"
                                 color="primary"
                                 onClick={() => buy(saleId, price)}
-                                style={{marginTop: "1em",marginBottom: "1em",marginRight: "1em"}}
+                                style={{marginTop: "2em",marginBottom: "1em",marginRight: "1em"}}
                             >
                               购买
                             </Button>
@@ -340,9 +382,9 @@ const Item = () => {
                         {owner == account && !isForSale &&(
                             <Link to={`/transfer/${tokenId}`}>
                               <Button
-                                  variant="outlined"
+                                  variant="contained"
                                   color="primary"
-                                  style={{marginTop: "1em",marginBottom: "1em",marginLeft: "1em"}}
+                                  style={{marginTop: "2em",marginBottom: "1em",marginLeft: "1em"}}
                               >
                                 转让
                               </Button>

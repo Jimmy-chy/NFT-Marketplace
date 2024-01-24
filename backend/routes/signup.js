@@ -13,7 +13,7 @@ router.get("/", (req, res) => {
 
     //ALTER保证id自增紧凑
     let insertSQL = ` ALTER TABLE user AUTO_INCREMENT =1;` + `INSERT INTO user(uname,pwd,address,email,gender,phone,college,major) VALUES(?,?,?,?,?,?,?,?)`;
-    let insertSQLParams = [req.query.uname, req.query.pwd, req.query.address, req.query.email, req.query.gender, req.query.phone, req.query.college, req.query.major]
+    let insertSQLParams = [req.query.uname, req.query.pwd, req.query.address, req.query.email, req.query.gender, req.query.phone]
 
     pool.getConnection((err, conn) => {
         if (err)
@@ -37,8 +37,8 @@ router.post("/", (req, res) => {
     console.debug("post signup");
     console.log(req.body)
     //ALTER保证id自增紧凑
-    let insertSQL = ` ALTER TABLE user AUTO_INCREMENT =1;` + `INSERT INTO user(uname,pwd,address,email,gender,phone,college,major) VALUES(?,?,?,?,?,?,?,?)`;
-    let insertSQLParams = [req.body.uname, req.body.pwd, req.body.address, req.body.email, req.body.gender, req.body.phone, req.body.college, req.body.major];
+    let insertSQL = ` ALTER TABLE user AUTO_INCREMENT =1;` + `INSERT INTO user(uname,pwd,address,email,gender,phone) VALUES(?,?,?,?,?,?,?,?)`;
+    let insertSQLParams = [req.body.uname, req.body.pwd, req.body.address, req.body.email, req.body.gender, req.body.phone];
 
     pool.getConnection((err, conn) => {
         if (err)

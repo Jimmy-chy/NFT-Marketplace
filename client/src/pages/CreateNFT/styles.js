@@ -12,7 +12,7 @@ const useStyles = makeStyles({
       maxWidth: "730px",
       background: "#FFF",
       borderRadius: "8px",
-    
+
       display: "flex",
       flexDirection: "column",
 
@@ -24,7 +24,7 @@ const useStyles = makeStyles({
 
         width: "400px",
         minWidth: "240px",
-        marginTop: "64px",
+        // marginTop: "64px",
         marginLeft: "2rem",
         minInlineSize: "auto",
         border: "0",

@@ -21,17 +21,75 @@ import { useStyles } from "./styles.js";
 import DropZone from "../../components/DropZone";
 
 import { api } from "../../services/api";
-import { Paper } from '@material-ui/core';
-import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 
+import { Paper } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Stepper from '@material-ui/core/Stepper';
+import Step from '@material-ui/core/Step';
+import StepLabel from '@material-ui/core/StepLabel';
+import Typography from '@material-ui/core/Typography';
+
+const useStylesStepper = makeStyles((theme) => ({
+  root: {
+    background: "#FFF",
+    padding: '5px',
+    width: '100%',
+    margin: 'auto'
+  },
+  backButton: {
+    marginLeft: theme.spacing(14),
+    marginRight: theme.spacing(1),
+  },
+  instructions: {
+    marginTop: theme.spacing(1),
+    marginLeft: theme.spacing(15),
+    marginBottom: theme.spacing(2),
+    fontSize: '10px'
+  },
+}));
+
+function getSteps() {
+  return ['选择数据','数据加密','关键信息上链','完成'];
+}
+
+function getStepContent(stepIndex) {
+  switch (stepIndex) {
+    case 0:
+      return '选择数据...';
+    case 1:
+      return '数据加密中...';
+    case 2:
+      return '数据关键信息上链中...';
+    case 3:
+      return '完成！';
+    default:
+      return 'Unknown stepIndex';
+  }
+}
 
 const CreateNFT = () => {
   const classes = useStyles();
   const history = useHistory();
+  //进度条
+  const classesStepper = useStylesStepper();
+  const [activeStep, setActiveStep] = React.useState(0);
+  const steps = getSteps();
+
+  const handleNext = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep + 1);
+  };
+
+  const handleBack = () => {
+    setActiveStep((prevActiveStep) => prevActiveStep - 1);
+  };
+
+  const handleReset = () => {
+    setActiveStep(0);
+  };
 
   const account = useSelector((state) => state.allNft.account);
   const artTokenContract = useSelector(
-    (state) => state.allNft.artTokenContract
+      (state) => state.allNft.artTokenContract
   );
 
   const [selectedFile, setSelectedFile] = useState();
@@ -133,8 +191,8 @@ const CreateNFT = () => {
   async function mint(tokenMetadataURL) {
     try {
       const receipt = await artTokenContract.methods
-        .mint(tokenMetadataURL)
-        .send({ from: account });
+          .mint(tokenMetadataURL)
+          .send({ from: account });
       // console.log(receipt);
       // console.log(receipt.events.Transfer.returnValues.tokenId);
       history.push('/');
@@ -173,99 +231,109 @@ const CreateNFT = () => {
   };
 
   return (
-    <div className={classes.pageCreateNft}>
-      <form onSubmit={createNFT}>
-        <div className={classes.formHeader}>
-          <h1>创作数据资产NFT</h1>
-          <Link to="/">
-            <CancelOutlinedIcon fontSize="large" />
-          </Link>
-        </div>
-        <div className={classes.content}>
-          <div className={classes.dropzone}>
-            <DropZone onFileUploaded={setSelectedFile} />
+      <div className={classes.pageCreateNft}>
+        <form onSubmit={createNFT}>
+          <div className={classes.formHeader}>
+            <h1>创作数据资产NFT</h1>
+            <Link to="/">
+              <CancelOutlinedIcon fontSize="large" />
+            </Link>
           </div>
+          <div className={classes.content}>
+            <div className={classes.dropzone}>
+              <DropZone onFileUploaded={setSelectedFile} />
+            </div>
 
-          <fieldset>
-            <TextField
-              label="标题"
-              name="title"
-              variant="filled"
-              required
-              value={formData.title}
-              onChange={handleInputChange}
-              fullWidth
-            />
-            <TextField
-                label="类型"
-                name="type"
-                variant="filled"
-                required
-                value={formData.type}
-                onChange={handleInputChange}
-                fullWidth
-            />
-            <TextField
-              id="outlined-multiline-static"
-              multiline
-              rows={4}
-              label="描述"
-              name="description"
-              variant="filled"
-              required
-              value={formData.description}
-              onChange={handleInputChange}
-              fullWidth
-            />
-
-            <TextField
-              label="价格"
-              name="price"
-              variant="filled"
-              value={formData.price}
-              onChange={handleInputChange}
-              InputProps={{
-                startAdornment: <InputAdornment position="start">￥</InputAdornment>,
-              }}
-              fullWidth
-            />
-
-            <Paper  style={{ padding: 10, width: '100%',  margin: 'auto'  }}>
-              <input
-                  // accept="image/*"
-                  style={{ display: 'none' }}
-                  id="file-upload-input"
-                  type="file"
-                  onChange={handleFileChange}
+            <fieldset>
+              <TextField
+                  label="标题"
+                  name="title"
+                  variant="filled"
+                  required
+                  value={formData.title}
+                  onChange={handleInputChange}
+                  fullWidth
               />
-              <label htmlFor="file-upload-input">
-                <Button
-                    variant="outlined"
-                    color="primary"
-                    component="span"
-                    startIcon={<CloudUploadIcon />}
-                    fullWidth
-                >
-                  上传原始资产数据
-                </Button>
-              </label>
+              <TextField
+                  label="类型"
+                  name="type"
+                  variant="filled"
+                  required
+                  value={formData.type}
+                  onChange={handleInputChange}
+                  fullWidth
+              />
+              <TextField
+                  id="outlined-multiline-static"
+                  multiline
+                  rows={4}
+                  label="描述"
+                  name="description"
+                  variant="filled"
+                  required
+                  value={formData.description}
+                  onChange={handleInputChange}
+                  fullWidth
+              />
 
-              {selectedFile && (
-                  // <Typography variant="body1" style={{ marginTop: 10 }}>
-                  //   已选择文件: {selectedFile.name}
-                  // </Typography>
-                  <TextField
-                      label="已上传原始资产数据"
-                      name="price"
-                      variant="filled"
-                      value={selectedFile.name}
-                      style={{ marginTop: 10 }}
-                      fullWidth
-                  />
-              )}
-            </Paper>
+              <TextField
+                  label="价格"
+                  name="price"
+                  variant="filled"
+                  value={formData.price}
+                  onChange={handleInputChange}
+                  InputProps={{
+                    startAdornment: <InputAdornment position="start">ETH</InputAdornment>,
+                  }}
+                  fullWidth
+              />
 
-            <div>
+              <Paper  style={{ padding: 5, width: '100%',  marginTop: '1em'  }}>
+                <div className={classesStepper.root}>
+                  <Stepper activeStep={activeStep} alternativeLabel>
+                    {steps.map((label) => (
+                        <Step key={label}>
+                          <StepLabel>{label}</StepLabel>
+                        </Step>
+                    ))}
+                  </Stepper>
+                  <div>
+                    {activeStep === steps.length ? (
+                        <div>
+                          <Typography className={classesStepper.instructions}>
+                            已完成！<br/>
+                            <span>
+                          From：0x7471...9aa3<br/>
+                        </span>
+                            To：0xF716...D45F
+                          </Typography>
+                          <Button onClick={handleReset}>Reset</Button>
+                        </div>
+                    ) : (
+                        <div>
+                          <Typography className={classesStepper.instructions}>当前状态：{getStepContent(activeStep)}</Typography>
+                          <div>
+                            <Button
+                                variant="outlined"
+                                color="primary"
+                                disabled={activeStep != 0}
+                                onClick={handleBack}
+                                className={classesStepper.backButton}
+                            >
+                              选择数据
+                            </Button>
+                            {/*<Button variant="outlined" color="secondary" onClick={handleNext} disabled='true'>*/}
+                            <Button variant="outlined" color="secondary" onClick={handleNext}>
+                              {activeStep === steps.length - 1 ? 'Finish' : '加密'}
+                            </Button>
+                          </div>
+                        </div>
+                    )}
+                  </div>
+                </div>
+              </Paper>
+
+              <div>
                 <Dialog
                     open={open}
                     onClose={handleClose}
@@ -312,18 +380,18 @@ const CreateNFT = () => {
                     </Button>
                   </DialogActions>
                 </Dialog>
-              <div style={{ marginTop: 10 }}>
-                <Button variant="outlined" color="primary" onClick={handleClickOpen('paper')}>版权协议</Button>
-                <Button variant="outlined" color="primary" type="submit" disabled={flag}>
-                  提交
-                </Button>
-              </div>
+                <div style={{ marginTop: 10 }}>
+                  <Button variant="contained" color="primary" onClick={handleClickOpen('paper')} style={{marginRight: '1em'}}>版权协议</Button>
+                  <Button variant="contained" color="primary" type="submit" disabled={flag}>
+                    提交
+                  </Button>
+                </div>
 
-            </div>
-          </fieldset>
-        </div>
-      </form>
-    </div>
+              </div>
+            </fieldset>
+          </div>
+        </form>
+      </div>
   );
 };
 

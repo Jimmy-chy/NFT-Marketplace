@@ -72,44 +72,20 @@ const Login = () => {
             }
         });
     }
-    
+
     // console.log("111",document.getElementsByName('uname').value)
     function rmbpsw(e){
-        setFormData({ ...formData, ["isRem"]: e.target.checked });  
-        console.log(formData)     
+        setFormData({ ...formData, ["isRem"]: e.target.checked });
+        console.log(formData)
     }
-    // function test(){
-    //     document.getElementById('uname').value=123
-    //     console.log("三影片",document.getElementById('uname').value)
-    // }
-    // test()
-    // console.log("yes???????")
-    // console.log(getCookie('uname'))
-    // console.log(getCookie('pwd'))
-    // if (getCookie('uname') !== '' && getCookie('pwd') !== '') {
-    //     this.props.form.setFieldsValue({
-    //     uname: getCookie('uname'),
-    //     pwd: getCookie('pwd'),
-    //     });
-    //     setFormData({...formData, ["isRem"]:true})
-    // }
+
     function handleInputChange(event) {
         let { name, value } = event.target;
         setFormData({ ...formData, [name]: value });
         console.log("哈哈哈",name, value,formData)
-        // if(event.target.name=='uname'){
-        //     if(formData['isFirst']){
-        //         console.log("first time")
-        //         setFormData({...formData, ["isFirst"]:false})
-        //         document.getElementById("pwd").value=""
-        //         setFormData({...formData, ["isRem"]:false})
-        //     }else{
-        //         console.log("not first")
-        //     }
-        // }
     }
     //接受用户输入参数
-    
+
     function logOut(){
         ex.clear()
         history.push('/')
@@ -184,33 +160,33 @@ const Login = () => {
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-                    <h2>高安全等级数据资产交易管理平台</h2>
+                    <h2>数据资产交易管理平台</h2>
                 </Grid>
                 <div style={{display:ex.isLogin?'none':'block'}}>
-                <TextField id='uname' onChange={handleInputChange} label='用户名' placeholder='输入用户名' name="uname" fullWidth required/>
-                <TextField id='pwd' onChange={handleInputChange} label='密码' placeholder='输入密码' name="pwd" type='password' fullWidth required/>
-                <FormControlLabel id='rmb' onChange={rmbpsw} checked={formData["isRem"]}
-                    control={
-                        <Checkbox
-                            name="checkedB"
-                            color="primary"
-                        />
-                    }
-                    label="记住密码"
-                />
-                {/*<Link href="/">*/}
+                    <TextField id='uname' onChange={handleInputChange} label='用户名' placeholder='输入用户名' name="uname" fullWidth required/>
+                    <TextField id='pwd' onChange={handleInputChange} label='密码' placeholder='输入密码' name="pwd" type='password' fullWidth required/>
+                    <FormControlLabel id='rmb' onChange={rmbpsw} checked={formData["isRem"]}
+                                      control={
+                                          <Checkbox
+                                              name="checkedB"
+                                              color="primary"
+                                          />
+                                      }
+                                      label="记住密码"
+                    />
+                    {/*<Link href="/">*/}
                     <Button onClick={login} type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>登录</Button>
-                {/*</Link>*/}
-                <Typography>
-                    <Link href="#">
-                        忘记密码 ?
-                    </Link>
-                </Typography>
-                <Typography>
-                    <Link href="SignUp">
-                        注册
-                    </Link>
-                </Typography>
+                    {/*</Link>*/}
+                    <Typography>
+                        <Link href="#">
+                            忘记密码 ?
+                        </Link>
+                    </Typography>
+                    <Typography>
+                        <Link href="SignUp">
+                            注册
+                        </Link>
+                    </Typography>
                 </div>
                 <div style={{display:ex.isLogin?'block':'none'}}>
                     <h1>已登陆用户:{ex.uname}</h1>

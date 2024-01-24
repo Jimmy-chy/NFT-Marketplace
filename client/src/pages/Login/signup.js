@@ -13,7 +13,7 @@ import Checkbox from '@material-ui/core/Checkbox';
 import {Link} from "react-router-dom";
 import ParticlesBg from "particles-bg";
 import {api} from "../../services/api";
-import { useHistory } from 'react-router-dom'; 
+import { useHistory } from 'react-router-dom';
 
 const Signup = () => {
     const history = useHistory()
@@ -65,8 +65,6 @@ const Signup = () => {
         address: "",
         email: "",
         gender: "",
-        college: "",
-        major:"",
         phone: "",
         pwd: "",
         cPwd:"",
@@ -81,8 +79,6 @@ const Signup = () => {
         email: "邮箱",
         gender: "性别",
         phone: "电话号码",
-        college: "学院",
-        major:"专业",
     }
     let isAgreeable = false;
 
@@ -116,7 +112,7 @@ const Signup = () => {
         }
         event.preventDefault();
 
-        const {uname,pwd, address, email, gender, phone, college, major} = formData;
+        const {uname,pwd, address, email, gender, phone} = formData;
         var Fdata = {}
         Fdata["uname"] = uname
         Fdata["pwd"] = pwd
@@ -124,8 +120,6 @@ const Signup = () => {
         Fdata["email"] = email
         Fdata["gender"] = gender
         Fdata["phone"] = phone
-        Fdata["college"] = college
-        Fdata["major"] = major
 
         //发送请求
         try {
@@ -178,38 +172,9 @@ const Signup = () => {
                             <FormControlLabel value="1" control={<Radio/>} label="男"/>
                         </RadioGroup>
                     </FormControl>
-                    
-                    <FormControl fullWidth>
-                    <InputLabel id="demo-controlled-open-select-label">所属学院</InputLabel>
-                    <Select
-                        labelId="demo-controlled-open-select-label"
-                        id="demo-controlled-open-select"
-                        name='college'
-                        value={formData.college}
-                        onChange={handleInputChange}
-                    >
-                        <MenuItem value="">
-                        <em>None</em>
-                        </MenuItem>
-                        <MenuItem value={1}>工商管理学院</MenuItem>
-                        <MenuItem value={2}>财务金融学院</MenuItem>
-                        <MenuItem value={3}>商务经济学院</MenuItem>
-                        <MenuItem value={4}>酒店管理学院</MenuItem>
-                        <MenuItem value={5}>商务外语学院</MenuItem>
-                        <MenuItem value={6}>艺术设计学院</MenuItem>
-                        <MenuItem value={7}>商务信息学院</MenuItem>
-                        <MenuItem value={8}>文法学院</MenuItem>
-                        <MenuItem value={9}>马克思主义学院</MenuItem>
-                        <MenuItem value={10}>上海洛桑酒店管理学院</MenuItem>
-                        <MenuItem value={11}>现代流通国家级实验教学示范中心</MenuItem>
-                        <MenuItem value={12}>国际教育学院、商务部国际商务官员研修基地（上海）</MenuItem>
-                    </Select>
-
-                    </FormControl>
-                    <TextField fullWidth label='专业' name="major" value={formData.major} onChange={handleInputChange} placeholder="请输入所在专业"/>
                     <TextField fullWidth label='电话号码' name="phone" value={formData.phone} onChange={handleInputChange} placeholder="请输入电话号码"/>
                     <TextField fullWidth label='密码' name="pwd" type='password' value={formData.pwd} onChange={handleInputChange} placeholder="请输入密码"/>
-                    <TextField fullWidth label='确认密码' name='cPwd' type='cPwd' value={formData.cPwd} onChange={handleInputChange} placeholder="确认密码"/>
+                    <TextField fullWidth label='确认密码' name='cPwd' type='password' value={formData.cPwd} onChange={handleInputChange} placeholder="确认密码"/>
                     <FormControlLabel
                         control={<Checkbox
                             onClick={agree}
@@ -217,7 +182,7 @@ const Signup = () => {
                         label="同意所有条件"
                     />
                     {/*<Link to="/Login">*/}
-                        <Button type='submit' variant='contained' color='primary' fullWidth>注册</Button>
+                    <Button type='submit' variant='contained' color='primary' fullWidth>注册</Button>
                     {/*</Link>*/}
                 </form>
             </Paper>
