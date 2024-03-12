@@ -93,26 +93,18 @@ const Item = () => {
 
   async function putForSale(id, price) {
     try {
-
       if(isSold||!isTransfer){
         try {
-
           const receipt2 = await artTokenContract.methods
               .approve(marketplaceContract._address,id)
               .send({gas:210000,from: account });
-          // console.log(receipt2);
         }catch (error) {
           console.error("Error while giveResaleApproval",error);
         }
-
       }
-
       const receipt = await marketplaceContract.methods
           .putItemForSale(id, price)
           .send({ gas: 210000, from: account });
-
-      // console.log(receipt);
-
     } catch (error) {
       console.error("Error, puting for sale: ", error);
       alert("Error while puting for sale!");
@@ -124,7 +116,6 @@ const Item = () => {
       const receipt = await marketplaceContract.methods
           .buyItem(saleId)
           .send({ gas: 210000, value: price, from: account });
-      // console.log(receipt);
       const id = receipt.events.itemSold.id; ///saleId
     } catch (error) {
       console.error("Error, buying: ", error);
@@ -197,7 +188,7 @@ const Item = () => {
                               <span style={{fontSize: '14px'}}>
                                 Contract Address
                               </span>
-                              <a href="https://goerli.etherscan.io/address/0x13dce096e0b146388f8df5944f6a6666d6f18a45" target="_blank" style={{marginLeft:'9em',fontSize: '12px'}}>0x13Dce0...8A45</a>
+                              <a href="https://goerli.etherscan.io/address/0xd1DD75Fab6C853649eB8B6e9a8890C75817f7641" target="_blank" style={{marginLeft:'9em',fontSize: '12px'}}>0xd1DD7...7641</a>
                               <br/>
                               <div style={{marginTop: '6px',marginBottom: '6px'}}>
                                 <span style={{fontSize: '14px'}}>
@@ -210,9 +201,14 @@ const Item = () => {
                               <span style={{fontSize: '14px'}}>
                                 Token Standard
                               </span>
-                              <span style={{marginLeft:'11em',fontSize: '12px'}}>
+                              <span style={{marginLeft:'11em',fontSize: '12px',marginBottom: '8px'}}>
                                 ERC-721
                               </span>
+                              <br/>
+                              <span style={{marginTop: '6px',fontSize: '14px'}}>
+                                交易记录
+                              </span>
+                              <a href="https://goerli.etherscan.io/nft/0xd1dd75fab6c853649eb8b6e9a8890c75817f7641/1" target="_blank" style={{marginLeft:'15em',fontSize: '12px'}}>点击查看</a>
                             </div>
                           </Typography>
                         </AccordionDetails>

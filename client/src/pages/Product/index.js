@@ -232,7 +232,7 @@ const Product=()=>{
 
     const nftItem = useSelector((state) => state.allNft.nft);
     return (
-        <div >
+        <div>
         {/* <div className={classes.main}> */}
 
             {/* <img src={NFTbg} alt="NFTbg" className={classes.nftbg}/> */}
@@ -242,50 +242,51 @@ const Product=()=>{
             </div>
         </div> */}
             <div>
-                <h3>输入商品名称</h3>
-            <form onSubmit={onSubmit} className={classes.form}>
-                <TextField
-                    id="standard-bare"
-                    variant="outlined"
-                    defaultValue="search..."
-                    InputProps={{
-                        endAdornment: (
-                            <IconButton>
-                                <SearchOutlined />
-                            </IconButton>
-                        ),
-                    }}
-                    onChange ={onChange}
-                    value = {keyword.receive}
-                />
-            </form>
-            价格
-            <Select
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                name='price'
-                onChange={handleInputChange}
-            >
-                <MenuItem value="">
-                </MenuItem>
-                <MenuItem value={0}>升序</MenuItem>
-                <MenuItem value={1}>降序</MenuItem>
-            </Select>
-            <span> </span>
-            售卖状态
-            <Select
-                labelId="demo-controlled-open-select-label"
-                id="demo-controlled-open-select"
-                name='sell'
-                onChange={handleSell}
-            >
-                <MenuItem value="">
-                </MenuItem>
-                <MenuItem value={2}>全部</MenuItem>
-                <MenuItem value={0}>在售</MenuItem>
-                <MenuItem value={1}>不在售</MenuItem>
-            </Select>
-            <span> </span>
+                <form onSubmit={onSubmit} className={classes.form}>
+                    <TextField
+                        id="standard-bare"
+                        label="请输入数据资产名称"
+                        variant="outlined"
+                        defaultValue="search..."
+                        InputProps={{
+                            endAdornment: (
+                                <IconButton>
+                                    <SearchOutlined />
+                                </IconButton>
+                            ),
+                        }}
+                        style={{marginTop: "2em"}}
+                        onChange ={onChange}
+                        value = {keyword.receive}
+                    />
+                </form>
+                价格
+                <Select
+                    labelId="demo-controlled-open-select-label"
+                    id="demo-controlled-open-select"
+                    name='price'
+                    onChange={handleInputChange}
+                >
+                    <MenuItem value="">
+                    </MenuItem>
+                    <MenuItem value={0}>升序</MenuItem>
+                    <MenuItem value={1}>降序</MenuItem>
+                </Select>
+                <span> </span>
+                售卖状态
+                <Select
+                    labelId="demo-controlled-open-select-label"
+                    id="demo-controlled-open-select"
+                    name='sell'
+                    onChange={handleSell}
+                >
+                    <MenuItem value="">
+                    </MenuItem>
+                    <MenuItem value={2}>全部</MenuItem>
+                    <MenuItem value={0}>在售</MenuItem>
+                    <MenuItem value={1}>不在售</MenuItem>
+                </Select>
+                <span> </span>
             </div>
             <div className={classes.allNfts}>
                 <Grid

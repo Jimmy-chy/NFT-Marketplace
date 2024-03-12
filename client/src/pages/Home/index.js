@@ -306,7 +306,7 @@ const Home = () => {
         </section>
         <section className={classes.allNfts}>
           <div className={classes.nftheader}>
-            <Typography className={classes.title}>最新NFT产品</Typography>
+            <Typography className={classes.title}>最新数字资产NFT</Typography>
             <form onSubmit={onSubmit}>
               <TextField
                   id="standard-bare"

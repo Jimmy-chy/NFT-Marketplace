@@ -27,7 +27,7 @@ import MenuList from '@material-ui/core/MenuList';
 import {useStyles} from './styles.js'
 
 // import logo from '../../assets/shsxy.svg';
-import logo from '../../assets/Logo.jpg';
+import logo from '../../assets/Logo.png';
 import { ex } from "../../common/global.js";
 const Header = (props) => {
     const classes = useStyles();
@@ -128,24 +128,24 @@ const Header = (props) => {
                         </Link>
                         <Link to="/create-nft">
                             <Button href="#" size="large" className={classes.button0}>
-                                创作NFT
+                                发行NFT
                             </Button>
                         </Link>
-                        <Link to="/">
-                            <Button href="#" size="large" className={classes.button1}>
-                                NFT要闻
-                            </Button>
-                        </Link>
+                        {/*<Link to="/">*/}
+                        {/*    <Button href="#" size="large" className={classes.button1}>*/}
+                        {/*        NFT要闻*/}
+                        {/*    </Button>*/}
+                        {/*</Link>*/}
                         <Link to="/product">
                             <Button href="#" size="large" className={classes.button2}>
-                                NFT产品
+                                NFT交易市场
                             </Button>
                         </Link>
-                        <Link to="/">
-                            <Button href="#" size="large" className={classes.button3}>
-                                积分兑换
-                            </Button>
-                        </Link>
+                        {/*<Link to="/">*/}
+                        {/*    <Button href="#" size="large" className={classes.button3}>*/}
+                        {/*        积分兑换*/}
+                        {/*    </Button>*/}
+                        {/*</Link>*/}
                     </div>
                     <div className={classes.account2}>
                         <Link to="/UserSetting">

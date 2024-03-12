@@ -153,22 +153,14 @@ const CreateNFT = () => {
     console.log(formData)
     event.preventDefault();
     const { title,type, description,price} = formData;
-
-    // console.log("title: " + title);
     const data = new FormData();
-
     data.append("name", title);
     data.append("type", type);
     data.append("description", description);
     data.append("price", price);
-    // data.append("author", author);
-    // data.append("college", college);
-
     if(selectedFile){
       data.append('img', selectedFile);
-      // console.log("slectedFile: ", selectedFile);
     }
-
     try {
       const totalSupply = await artTokenContract.methods.totalSupply().call();
       data.append("tokenId", Number(totalSupply) + 1);
@@ -178,13 +170,9 @@ const CreateNFT = () => {
           "Content-Type": `multipart/form-data; boundary=${data._boundary}`,
         },
       });
-      // console.log("CreateNFT------------response",response);
-
-
       await mint(response.data.message);
     } catch (error) {
       console.log(error);
-      // error.response.data
     }
   }
 
@@ -193,8 +181,6 @@ const CreateNFT = () => {
       const receipt = await artTokenContract.methods
           .mint(tokenMetadataURL)
           .send({ from: account });
-      // console.log(receipt);
-      // console.log(receipt.events.Transfer.returnValues.tokenId);
       history.push('/');
     } catch (error) {
       console.error("Error, minting: ", error);
@@ -234,7 +220,7 @@ const CreateNFT = () => {
       <div className={classes.pageCreateNft}>
         <form onSubmit={createNFT}>
           <div className={classes.formHeader}>
-            <h1>创作数据资产NFT</h1>
+            <h1>发行数字资产NFT</h1>
             <Link to="/">
               <CancelOutlinedIcon fontSize="large" />
             </Link>
@@ -322,8 +308,8 @@ const CreateNFT = () => {
                             >
                               选择数据
                             </Button>
-                            {/*<Button variant="outlined" color="secondary" onClick={handleNext} disabled='true'>*/}
-                            <Button variant="outlined" color="secondary" onClick={handleNext}>
+                            <Button variant="outlined" color="secondary" onClick={handleNext} disabled='true'>
+                            {/*<Button variant="outlined" color="secondary" onClick={handleNext}>*/}
                               {activeStep === steps.length - 1 ? 'Finish' : '加密'}
                             </Button>
                           </div>

@@ -1,9 +1,9 @@
 {
   "contractName": "Address",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Collection of functions related to the address type\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@openzeppelin/contracts/utils/Address.sol\":\"Address\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x3b4820cac4f127869f6eb496c1d74fa6ac86ed24071e0f94742e6aef20e7252c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23e1c7303c30a2ef9c9b3f861cda15c78e4c9697b4a7988f2bf7b21c392a02fb\",\"dweb:/ipfs/QmWQJh5MsXJZjSTzAs9n5gtrqWYgXwkBa6xfwD5KKGQgSC\"]}},\"version\":1}",
-  "bytecode": "0x60566050600b82828239805160001a6073146043577f4e487b7100000000000000000000000000000000000000000000000000000000600052600060045260246000fd5b30600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212209464fab263dc751de6bb7ba8d46a943a9dc6eb3a44c49b88ad01fff904c999db64736f6c63430008110033",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea26469706673582212209464fab263dc751de6bb7ba8d46a943a9dc6eb3a44c49b88ad01fff904c999db64736f6c63430008110033",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.24+commit.e11b9ed9\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"details\":\"Collection of functions related to the address type\",\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"@openzeppelin/contracts/utils/Address.sol\":\"Address\"},\"evmVersion\":\"shanghai\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\"},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/utils/Address.sol\":{\"keccak256\":\"0x3b4820cac4f127869f6eb496c1d74fa6ac86ed24071e0f94742e6aef20e7252c\",\"license\":\"MIT\",\"urls\":[\"bzz-raw://23e1c7303c30a2ef9c9b3f861cda15c78e4c9697b4a7988f2bf7b21c392a02fb\",\"dweb:/ipfs/QmWQJh5MsXJZjSTzAs9n5gtrqWYgXwkBa6xfwD5KKGQgSC\"]}},\"version\":1}",
+  "bytecode": "0x6055604b600b8282823980515f1a607314603f577f4e487b71000000000000000000000000000000000000000000000000000000005f525f60045260245ffd5b305f52607381538281f3fe730000000000000000000000000000000000000000301460806040525f80fdfea26469706673582212200a803fdec49eb0ace574ebf3ed87a0926bf8816c6177447ae90e121196c5a75764736f6c63430008180033",
+  "deployedBytecode": "0x730000000000000000000000000000000000000000301460806040525f80fdfea26469706673582212200a803fdec49eb0ace574ebf3ed87a0926bf8816c6177447ae90e121196c5a75764736f6c63430008180033",
   "immutableReferences": {},
   "generatedSources": [],
   "deployedGeneratedSources": [],
@@ -99,31 +99,37 @@
                 },
                 {
                   "AST": {
+                    "nativeSrc": "1012:52:7",
                     "nodeType": "YulBlock",
                     "src": "1012:52:7",
                     "statements": [
                       {
+                        "nativeSrc": "1026:28:7",
                         "nodeType": "YulAssignment",
                         "src": "1026:28:7",
                         "value": {
                           "arguments": [
                             {
                               "name": "account",
+                              "nativeSrc": "1046:7:7",
                               "nodeType": "YulIdentifier",
                               "src": "1046:7:7"
                             }
                           ],
                           "functionName": {
                             "name": "extcodesize",
+                            "nativeSrc": "1034:11:7",
                             "nodeType": "YulIdentifier",
                             "src": "1034:11:7"
                           },
+                          "nativeSrc": "1034:20:7",
                           "nodeType": "YulFunctionCall",
                           "src": "1034:20:7"
                         },
                         "variableNames": [
                           {
                             "name": "size",
+                            "nativeSrc": "1026:4:7",
                             "nodeType": "YulIdentifier",
                             "src": "1026:4:7"
                           }
@@ -131,7 +137,7 @@
                       }
                     ]
                   },
-                  "evmVersion": "london",
+                  "evmVersion": "shanghai",
                   "externalReferences": [
                     {
                       "declaration": 1481,
@@ -3777,31 +3783,37 @@
                           "statements": [
                             {
                               "AST": {
+                                "nativeSrc": "7408:145:7",
                                 "nodeType": "YulBlock",
                                 "src": "7408:145:7",
                                 "statements": [
                                   {
+                                    "nativeSrc": "7430:40:7",
                                     "nodeType": "YulVariableDeclaration",
                                     "src": "7430:40:7",
                                     "value": {
                                       "arguments": [
                                         {
                                           "name": "returndata",
+                                          "nativeSrc": "7459:10:7",
                                           "nodeType": "YulIdentifier",
                                           "src": "7459:10:7"
                                         }
                                       ],
                                       "functionName": {
                                         "name": "mload",
+                                        "nativeSrc": "7453:5:7",
                                         "nodeType": "YulIdentifier",
                                         "src": "7453:5:7"
                                       },
+                                      "nativeSrc": "7453:17:7",
                                       "nodeType": "YulFunctionCall",
                                       "src": "7453:17:7"
                                     },
                                     "variables": [
                                       {
                                         "name": "returndata_size",
+                                        "nativeSrc": "7434:15:7",
                                         "nodeType": "YulTypedName",
                                         "src": "7434:15:7",
                                         "type": ""
@@ -3815,6 +3827,7 @@
                                           "arguments": [
                                             {
                                               "kind": "number",
+                                              "nativeSrc": "7502:2:7",
                                               "nodeType": "YulLiteral",
                                               "src": "7502:2:7",
                                               "type": "",
@@ -3822,38 +3835,45 @@
                                             },
                                             {
                                               "name": "returndata",
+                                              "nativeSrc": "7506:10:7",
                                               "nodeType": "YulIdentifier",
                                               "src": "7506:10:7"
                                             }
                                           ],
                                           "functionName": {
                                             "name": "add",
+                                            "nativeSrc": "7498:3:7",
                                             "nodeType": "YulIdentifier",
                                             "src": "7498:3:7"
                                           },
+                                          "nativeSrc": "7498:19:7",
                                           "nodeType": "YulFunctionCall",
                                           "src": "7498:19:7"
                                         },
                                         {
                                           "name": "returndata_size",
+                                          "nativeSrc": "7519:15:7",
                                           "nodeType": "YulIdentifier",
                                           "src": "7519:15:7"
                                         }
                                       ],
                                       "functionName": {
                                         "name": "revert",
+                                        "nativeSrc": "7491:6:7",
                                         "nodeType": "YulIdentifier",
                                         "src": "7491:6:7"
                                       },
+                                      "nativeSrc": "7491:44:7",
                                       "nodeType": "YulFunctionCall",
                                       "src": "7491:44:7"
                                     },
+                                    "nativeSrc": "7491:44:7",
                                     "nodeType": "YulExpressionStatement",
                                     "src": "7491:44:7"
                                   }
                                 ]
                               },
-                              "evmVersion": "london",
+                              "evmVersion": "shanghai",
                               "externalReferences": [
                                 {
                                   "declaration": 1744,
@@ -4048,7 +4068,8 @@
         ],
         "scope": 1772,
         "src": "126:7518:7",
-        "usedErrors": []
+        "usedErrors": [],
+        "usedEvents": []
       }
     ],
     "src": "33:7612:7"
@@ -4141,31 +4162,37 @@
                 },
                 {
                   "AST": {
+                    "nativeSrc": "1012:52:7",
                     "nodeType": "YulBlock",
                     "src": "1012:52:7",
                     "statements": [
                       {
+                        "nativeSrc": "1026:28:7",
                         "nodeType": "YulAssignment",
                         "src": "1026:28:7",
                         "value": {
                           "arguments": [
                             {
                               "name": "account",
+                              "nativeSrc": "1046:7:7",
                               "nodeType": "YulIdentifier",
                               "src": "1046:7:7"
                             }
                           ],
                           "functionName": {
                             "name": "extcodesize",
+                            "nativeSrc": "1034:11:7",
                             "nodeType": "YulIdentifier",
                             "src": "1034:11:7"
                           },
+                          "nativeSrc": "1034:20:7",
                           "nodeType": "YulFunctionCall",
                           "src": "1034:20:7"
                         },
                         "variableNames": [
                           {
                             "name": "size",
+                            "nativeSrc": "1026:4:7",
                             "nodeType": "YulIdentifier",
                             "src": "1026:4:7"
                           }
@@ -4173,7 +4200,7 @@
                       }
                     ]
                   },
-                  "evmVersion": "london",
+                  "evmVersion": "shanghai",
                   "externalReferences": [
                     {
                       "declaration": 1481,
@@ -7819,31 +7846,37 @@
                           "statements": [
                             {
                               "AST": {
+                                "nativeSrc": "7408:145:7",
                                 "nodeType": "YulBlock",
                                 "src": "7408:145:7",
                                 "statements": [
                                   {
+                                    "nativeSrc": "7430:40:7",
                                     "nodeType": "YulVariableDeclaration",
                                     "src": "7430:40:7",
                                     "value": {
                                       "arguments": [
                                         {
                                           "name": "returndata",
+                                          "nativeSrc": "7459:10:7",
                                           "nodeType": "YulIdentifier",
                                           "src": "7459:10:7"
                                         }
                                       ],
                                       "functionName": {
                                         "name": "mload",
+                                        "nativeSrc": "7453:5:7",
                                         "nodeType": "YulIdentifier",
                                         "src": "7453:5:7"
                                       },
+                                      "nativeSrc": "7453:17:7",
                                       "nodeType": "YulFunctionCall",
                                       "src": "7453:17:7"
                                     },
                                     "variables": [
                                       {
                                         "name": "returndata_size",
+                                        "nativeSrc": "7434:15:7",
                                         "nodeType": "YulTypedName",
                                         "src": "7434:15:7",
                                         "type": ""
@@ -7857,6 +7890,7 @@
                                           "arguments": [
                                             {
                                               "kind": "number",
+                                              "nativeSrc": "7502:2:7",
                                               "nodeType": "YulLiteral",
                                               "src": "7502:2:7",
                                               "type": "",
@@ -7864,38 +7898,45 @@
                                             },
                                             {
                                               "name": "returndata",
+                                              "nativeSrc": "7506:10:7",
                                               "nodeType": "YulIdentifier",
                                               "src": "7506:10:7"
                                             }
                                           ],
                                           "functionName": {
                                             "name": "add",
+                                            "nativeSrc": "7498:3:7",
                                             "nodeType": "YulIdentifier",
                                             "src": "7498:3:7"
                                           },
+                                          "nativeSrc": "7498:19:7",
                                           "nodeType": "YulFunctionCall",
                                           "src": "7498:19:7"
                                         },
                                         {
                                           "name": "returndata_size",
+                                          "nativeSrc": "7519:15:7",
                                           "nodeType": "YulIdentifier",
                                           "src": "7519:15:7"
                                         }
                                       ],
                                       "functionName": {
                                         "name": "revert",
+                                        "nativeSrc": "7491:6:7",
                                         "nodeType": "YulIdentifier",
                                         "src": "7491:6:7"
                                       },
+                                      "nativeSrc": "7491:44:7",
                                       "nodeType": "YulFunctionCall",
                                       "src": "7491:44:7"
                                     },
+                                    "nativeSrc": "7491:44:7",
                                     "nodeType": "YulExpressionStatement",
                                     "src": "7491:44:7"
                                   }
                                 ]
                               },
-                              "evmVersion": "london",
+                              "evmVersion": "shanghai",
                               "externalReferences": [
                                 {
                                   "declaration": 1744,
@@ -8090,18 +8131,19 @@
         ],
         "scope": 1772,
         "src": "126:7518:7",
-        "usedErrors": []
+        "usedErrors": [],
+        "usedEvents": []
       }
     ],
     "src": "33:7612:7"
   },
   "compiler": {
     "name": "solc",
-    "version": "0.8.17+commit.8df45f5f.Emscripten.clang"
+    "version": "0.8.24+commit.e11b9ed9.Emscripten.clang"
   },
   "networks": {},
-  "schemaVersion": "3.4.6",
-  "updatedAt": "2022-09-20T04:48:49.477Z",
+  "schemaVersion": "3.4.5",
+  "updatedAt": "2024-03-12T14:08:44.905Z",
   "devdoc": {
     "details": "Collection of functions related to the address type",
     "kind": "dev",

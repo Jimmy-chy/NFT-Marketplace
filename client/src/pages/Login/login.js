@@ -1,32 +1,100 @@
-import React, {useState} from 'react';
+import React, { useState, useEffect } from 'react';
 import {useSelector} from "react-redux";
-import {Grid, Paper, Avatar, TextField, Button, Typography, Link} from '@material-ui/core';
+import {Grid, Paper, Avatar, TextField, Button, Typography, Link, Icon} from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Checkbox from '@material-ui/core/Checkbox';
 import CancelOutlinedIcon from "@material-ui/icons/CancelOutlined";
 import SignUp from "./signup";
-import { useEffect } from 'react';
+import Web3 from 'web3';
 
 import ParticlesBg from "particles-bg";
 import {api} from "../../services/api";
 import { useHistory } from 'react-router-dom';
 import {ex} from '../../common/global.js'
 import { setCookie, getCookie, removeCookie } from '../../common/rememberPwd';
+import { makeStyles } from '@material-ui/core/styles';
+import logo from '../../assets/MetaMask.png';
+const MetaMaskIcon = () => {
+    const classes = useStyles();
 
+    return (
+        <Icon className={classes.icon}>
+            <img src={logo} alt="MetaMask" width="24" height="24" />
+        </Icon>
+    );
+};
+const useStyles = makeStyles((theme) => ({
+    root: {
+        flexGrow: 1,
+        height: '100vh',
+        alignItems: 'center',
+    },
+    paper: {
+        padding: theme.spacing(4),
+        textAlign: 'center',
+    },
+    icon: {
+        marginRight: theme.spacing(1),
+    },
+    heading: {
+        fontSize: theme.typography.pxToRem(18),
+        fontWeight: theme.typography.fontWeightBold,
+        marginTop: '1em',
+        marginBottom: '1em',
+        textAlign: 'center'
+    },
+}));
 const Login = () => {
     /*
         MetaMask钱包地址
         当用户登录时，用于判断当前钱包地址是否和用户注册时所填写的钱包地址一致
      */
+    const [metaMaskAddress, setMetaMaskAddress] = useState('');
     const accountAddress = useSelector((state) => state.allNft.account);
     // console.log(accountAddress);
+    const classes = useStyles();
     const [formData, setFormData] = useState({
         uname: "",
         pwd: "",
         isRem: false,
         isFirst: true,
     });
+    const [web3, setWeb3] = useState(null);
+
+    useEffect(() => {
+        // 检测 MetaMask 是否已连接，并获取用户地址
+        async function getMetaMaskAddress() {
+            if (window.ethereum) {
+                try {
+                    await window.ethereum.enable();
+                    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    setMetaMaskAddress(accounts[0]);
+                    const web3 = new Web3(window.ethereum);
+                    setWeb3(web3);
+                } catch (error) {
+                    console.error('MetaMask connection error:', error);
+                }
+            }
+        }
+
+        getMetaMaskAddress();
+    }, []);
+
+    const handleLogin = async () => {
+        try {
+            // 使用 MetaMask 进行签名
+            const signature = await web3.eth.personal.sign('登录数字资产交易管理平台', metaMaskAddress, '');
+            console.log('Signature:', signature);
+            alert('登录成功！');
+        } catch (error) {
+            console.error('Login error:', error);
+            alert('登录失败，请检查 MetaMask 是否已连接');
+        }
+    };
+
+
+
     const history = useHistory()
     useEffect(()=>{
         if (getCookie('uname') !== '' && getCookie('pwd') !== '') {
@@ -37,8 +105,8 @@ const Login = () => {
             setFormData({...formData, ["isRem"]:true, ["uname"]:username, ["pwd"]:password})
         }
     },[])
-    const paperStyle = {padding: 20, height: '70vh', width: 500, margin: "20px auto"}
-    const avatarStyle = {backgroundColor: '#1b5cbd'}
+    const paperStyle = {padding: 20, height: '60vh', width: 500, margin: "2em auto"}
+    const avatarStyle = {backgroundColor: '#1b5cbd',marginTop: '3em'}
     const btnstyle = {margin: '8px 0'}
     let config = {
         num: [4, 7],
@@ -155,38 +223,53 @@ const Login = () => {
         }
     }
     return (
-        <Grid >
+        <Grid>
             <ParticlesBg type="custom" config={config} bg={true}/>
+
             <Paper elevation={10} style={paperStyle}>
                 <Grid align='center'>
                     <Avatar style={avatarStyle}><LockOutlinedIcon/></Avatar>
-                    <h2>数据资产交易管理平台</h2>
+                    <h2>数字资产交易管理平台</h2>
                 </Grid>
+                <Paper  style={{ padding: 10, width: '100%',  marginTop: '2em',marginBottom:'2em'  }}>
+
+
+                    <Typography className={classes.heading}>已连接的 MetaMask 钱包</Typography>
+                    <Typography  gutterBottom align="center" style={{ padding: 10  }}>
+                        <MetaMaskIcon />
+                    </Typography>
+                    <Paper  style={{ padding: 10, width: '100%',  marginBottom:'1em'  }}>
+                        <Typography  gutterBottom align="center">
+                            {metaMaskAddress.slice(0, 7)}...{metaMaskAddress.slice(-4)}
+                        </Typography>
+                    </Paper>
+                </Paper>
+
                 <div style={{display:ex.isLogin?'none':'block'}}>
-                    <TextField id='uname' onChange={handleInputChange} label='用户名' placeholder='输入用户名' name="uname" fullWidth required/>
-                    <TextField id='pwd' onChange={handleInputChange} label='密码' placeholder='输入密码' name="pwd" type='password' fullWidth required/>
-                    <FormControlLabel id='rmb' onChange={rmbpsw} checked={formData["isRem"]}
-                                      control={
-                                          <Checkbox
-                                              name="checkedB"
-                                              color="primary"
-                                          />
-                                      }
-                                      label="记住密码"
-                    />
+                    {/*<TextField id='uname' onChange={handleInputChange} label='用户名' placeholder='输入用户名' name="uname" fullWidth required/>*/}
+                    {/*<TextField id='pwd' onChange={handleInputChange} label='密码' placeholder='输入密码' name="pwd" type='password' fullWidth required/>*/}
+                    {/*<FormControlLabel id='rmb' onChange={rmbpsw} checked={formData["isRem"]}*/}
+                    {/*                  control={*/}
+                    {/*                      <Checkbox*/}
+                    {/*                          name="checkedB"*/}
+                    {/*                          color="primary"*/}
+                    {/*                      />*/}
+                    {/*                  }*/}
+                    {/*                  label="记住密码"*/}
+                    {/*/>*/}
                     {/*<Link href="/">*/}
-                    <Button onClick={login} type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>登录</Button>
+                    <Button onClick={handleLogin} type='submit' color='primary' variant="contained" style={btnstyle} fullWidth>使用MetaMask钱包登录</Button>
                     {/*</Link>*/}
-                    <Typography>
-                        <Link href="#">
-                            忘记密码 ?
-                        </Link>
-                    </Typography>
-                    <Typography>
-                        <Link href="SignUp">
-                            注册
-                        </Link>
-                    </Typography>
+                    {/*<Typography>*/}
+                    {/*    <Link href="#">*/}
+                    {/*        忘记密码 ?*/}
+                    {/*    </Link>*/}
+                    {/*</Typography>*/}
+                    {/*<Typography>*/}
+                    {/*    <Link href="SignUp">*/}
+                    {/*        注册*/}
+                    {/*    </Link>*/}
+                    {/*</Typography>*/}
                 </div>
                 <div style={{display:ex.isLogin?'block':'none'}}>
                     <h1>已登陆用户:{ex.uname}</h1>

@@ -28,10 +28,10 @@ const useStyles = makeStyles({
         display:"flex",
         justifyContent:"center",
         alignItems:"center",
-    }
-    // form:{
-    //   backgroundColor:"white",
-    // },
+    },
+    form:{
+      backgroundColor:"white",
+    },
 });
 
 export { useStyles };
